@@ -133,7 +133,7 @@ class Game(Tk):
             self.module()
         self.afficher()
 
-    def fin(self) -> None:
+    def end(self) -> None:
         """show the score at the end of the game"""
         self.score_affiche.config(text="End : " + (str(self.score)))
         self.gel = 1
@@ -147,7 +147,8 @@ class Game(Tk):
                     nbr_carre_vide+= 1
 
         if nbr_carre_vide == 0:
-            self.fin()
+            print("nbr carre = 0")
+            self.end()
         else:
             #new place for the new case
             self.place = random.randint(1,nbr_carre_vide)
@@ -161,31 +162,7 @@ class Game(Tk):
                         alpha +=1
             
             if nbr_carre_vide == 1:
-                """for i in self.grille:
-                    print(i)
-                fin = True
-                ancien = int
-                for i in range(4):
-                    ancien = self.grille[i][0]
-                    for o in range(1,4):
-                        if ancien == self.grille[i][o]:
-                            fin == False
-                        print
-                        ancien = self.grille[i][o]
-                    
-                ancien = int
-                for i in range(4):
-                    ancien = self.grille[0][i]
-                    for o in range(1,4):
-                        if ancien == self.grille[o][i]:
-                            fin = False
-                        ancien = self.grille[o][i]"""
-                if self.check_end:
-                    self.fin()
-
-                """if fin == True:
-                    print("fin car aucune action possible")
-                    self.fin()"""
+                pass
    
     def deplace(self,liste) -> list:
         new_liste = []
@@ -229,7 +206,7 @@ class Game(Tk):
             self.grille = new_liste
 
     def check_end(self) -> bool:
-        new_grid = self.grille.clone()
+        new_grid = self.grille.copy()
         try:
             self.up()
             if new_grid == self.grille:
@@ -240,9 +217,9 @@ class Game(Tk):
                         self.right()
                         if new_grid == self.grille:
                             self.grill = new_grid
-                            return False
+                            return True
             self.grille = new_grid
-            return True
+            return False
         except:
             self.grille = new_grid
             return True
@@ -253,19 +230,13 @@ class Game(Tk):
             for i in range(4):
                 self.grille[i] = self.deplace(self.grille[i])
             self.decallage(3)
-            self.module()
-        if self.gel == 0:
-            self.afficher()
-
+            
     def down(self) -> None:
         if self.gel == 0:
             self.decallage(3)
             for i in range(4):
                 self.grille[i] = self.deplace(self.grille[i])
             self.decallage(1)
-            self.module()
-        if self.gel == 0:
-            self.afficher()
     
     def right(self) -> None:
         if self.gel == 0:
@@ -273,17 +244,45 @@ class Game(Tk):
             for i in range(4):
                 self.grille[i] = self.deplace(self.grille[i])
             self.decallage(2)
-            self.module()
-        if self.gel == 0:
-            self.afficher()
 
     def left(self) -> None:
         if self.gel == 0:
             for i in range(4):
                 self.grille[i] = self.deplace(self.grille[i])
-            self.module()
-        if self.gel == 0:
-            self.afficher()
+                
+    def true_move(self,direction) -> bool:
+        new_grid = self.grille.copy()
+        if direction == "Up":
+            self.up()
+            if new_grid != self.grille:
+                self.grille = new_grid
+                return True
+            self.grille = new_grid
+            return False
+
+        if direction == "Down":
+            self.down()
+            if new_grid != self.grille:
+                self.grille = new_grid
+                return True
+            self.grille = new_grid
+            return False
+
+        if direction == "Left":
+            self.left()
+            if new_grid != self.grille:
+                self.grille = new_grid
+                return True
+            self.grille = new_grid
+            return False
+
+        if direction == "Right":
+            self.right()
+            if new_grid != self.grille:
+                self.grille = new_grid
+                return True
+            self.grille = new_grid  
+            return False
 
     def afficher(self) -> None:
         #Line one
@@ -313,15 +312,40 @@ class Game(Tk):
         self.destroy()
     
     def TouchePress(self,event) -> None:
-        if event.keysym == "Up":
-            self.up()
-        elif event.keysym == "Down":
-            self.down()
-        elif event.keysym == "Left":
-            self.left()
-        elif event.keysym == "Right":
-            self.right()
-        elif event.keysym == "BackSpace":
+        if self.gel == 0:
+            if event.keysym == "Up":
+                if self.true_move("Up"):
+                    self.up()
+                    self.module()
+                    self.afficher()
+                else:
+                    if self.check_end():
+                        self.end()
+            elif event.keysym == "Down":
+                if self.true_move("Down"):
+                    self.down()
+                    self.module()
+                    self.afficher()
+                else:
+                    if self.check_end():
+                        self.end()
+            elif event.keysym == "Left":
+                if self.true_move("Left"):
+                    self.left()
+                    self.module()
+                    self.afficher()
+                else:
+                    if self.check_end():
+                        self.end()
+            elif event.keysym == "Right":
+                if self.true_move("Right"):
+                    self.right()
+                    self.module()
+                    self.afficher()
+                else:
+                    if self.check_end():
+                        self.end()
+        if event.keysym == "BackSpace":
             self.new_partie()
         elif event.keysym == "Escape":
             exit()
