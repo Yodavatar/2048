@@ -95,5 +95,5 @@ feel free to contact me at contact@yodavatar.me <br>
 ---
 
 
-Thank you for using Snake!<br>
+Thank you for using 2048!<br>
 We hope you find this project useful and interesting. 🚀<br>
