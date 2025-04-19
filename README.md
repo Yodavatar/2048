@@ -35,7 +35,7 @@ We can move : Up, Down, Right and Left.
 
 __**3 - Score**__
 
-The score is calculated during the game and show.
+The score is calculated during the game and showed.
 
 __**4 - Assets**__
 
