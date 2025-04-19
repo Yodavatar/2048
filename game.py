@@ -1,6 +1,6 @@
 #Coding : utf-8
 #Coding by Yodavatar
-#Licensed code CC BY-NC-SA 4.0
+#Licensed code Mozilla Public License 2.0
 #Game : 2048
 
 from tkinter import *
@@ -115,7 +115,7 @@ class Game(Tk):
         self.bind("<Key>", self.TouchePress)
         self.configure(bg="#333333", padx=10, pady=10)
         self.geometry("400x500")
-        self.title("Jeu 2048")
+        self.title("2048")
         self.new_partie()
 
     def new_partie(self) -> None:
@@ -353,5 +353,5 @@ class Game(Tk):
 
 #Coding : utf-8
 #Coding by Yodavatar
-#Licensed code CC BY-NC-SA 4.0
+#Licensed code Mozilla Public License 2.0
 #Game : 2048
