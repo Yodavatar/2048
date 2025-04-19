@@ -31,8 +31,7 @@ The game has a display of 4 to height and 4 to width.
 
 __**2 - Movement of the game**__
 
-The snake can pass the border of the window.<br>
-He has also change his direction rotation around himself.<br>
+We can move : Up, Down, Right and Left. 
 
 __**3 - Score**__
 
