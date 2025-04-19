@@ -21,7 +21,7 @@ __**Version 1.0**__<br>
 A simple 2048's game in python. He use<br>
 tkinter and random libraries.<br>
 
-<img src="" width="300" height="300"/>
+<img src="https://github.com/user-attachments/assets/512c2602-d696-456d-986d-3b86c3b96c31" width="300" height="300"/>
 
 ## Features
 
